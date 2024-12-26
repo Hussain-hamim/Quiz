@@ -64,10 +64,14 @@ export default function QuizScreen() {
 
         {/* Footer */}
         <CustomButton
-          title="Next"
+          title={question ? "Next" : "Start again"}
           onPress={onNext}
           rightIcon={
-            <FontAwesome6 name="arrow-right-long" size={16} color="white" />
+            <FontAwesome6
+              name={question ? "arrow-right-long" : "reply"}
+              size={16}
+              color="white"
+            />
           }
         />
       </View>
