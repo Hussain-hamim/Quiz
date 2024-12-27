@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "newArchEnabled": true,
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon2.webp",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
