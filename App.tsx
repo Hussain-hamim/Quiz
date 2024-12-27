@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import QuizScreen from "./src/app/QuizScreen";
 import QuizProvider from "./src/providers/QuizProvider";
 import CustomButton from "./src/components/CustomButton";
-import { ImageBackground, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 export default function App() {
   const [start, setstart] = useState(true);
@@ -21,7 +21,6 @@ export default function App() {
               backgroundColor: "lightblue",
             }}
           >
-            {/* <ImageBackground source={require("./assets/background.jpg")}> */}
             <View style={{ alignItems: "center" }}>
               <Text style={{ fontWeight: "bold", fontSize: 30, color: "#289" }}>
                 Quiz
@@ -37,7 +36,6 @@ export default function App() {
             <Text style={{ color: "gray" }}>
               @Copyright 2025 - Hussain-Hamim
             </Text>
-            {/* </ImageBackground> */}
           </View>
         ) : (
           <QuizScreen />
