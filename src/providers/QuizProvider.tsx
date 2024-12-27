@@ -4,10 +4,10 @@ import {
   useEffect,
   useState,
   createContext,
-} from 'react';
-import questions from '../questions';
-import { Question } from '../types';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+} from "react";
+import questions from "../questions";
+import { Question } from "../types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type QuizContext = {
   question?: Question;
@@ -18,6 +18,7 @@ type QuizContext = {
   score: number;
   totalQuestions: number;
   bestScore: number;
+  isFinished: boolean;
 };
 
 const QuizContext = createContext<QuizContext>({
@@ -27,6 +28,7 @@ const QuizContext = createContext<QuizContext>({
   score: 0,
   totalQuestions: 0,
   bestScore: 0,
+  isFinished: false,
 });
 
 export default function QuizProvider({ children }: PropsWithChildren) {
@@ -46,20 +48,20 @@ export default function QuizProvider({ children }: PropsWithChildren) {
     // check if there is a new best score
     if (isFinished === true && score > bestScore) {
       setBestScore(score);
-      saveBestScore(score);
+      saveBestScore(score); // save the new best score to storage
     }
   }, [isFinished]);
 
   const restart = () => {
     setQuestionIndex(0);
-    setSelectedOption('');
+    setSelectedOption("");
     setScore(0);
   };
 
   const onNext = () => {
     if (isFinished) {
       restart();
-      return;
+      return; // return and do not do any the following code
     }
     // check if answer is correct
     if (selectedOption === question?.correctAnswer) {
@@ -71,8 +73,8 @@ export default function QuizProvider({ children }: PropsWithChildren) {
 
   const saveBestScore = async (value: number) => {
     try {
-      console.log('Save best score: ', value);
-      await AsyncStorage.setItem('best-score', value.toString());
+      console.log("Save best score: ", value);
+      await AsyncStorage.setItem("best-score", value.toString());
     } catch (e) {
       // saving error
     }
@@ -80,7 +82,7 @@ export default function QuizProvider({ children }: PropsWithChildren) {
 
   const loadBestScore = async () => {
     try {
-      const value = await AsyncStorage.getItem('best-score');
+      const value = await AsyncStorage.getItem("best-score");
       if (value !== null) {
         setBestScore(Number.parseInt(value));
       }
@@ -100,6 +102,7 @@ export default function QuizProvider({ children }: PropsWithChildren) {
         score,
         totalQuestions: questions.length,
         bestScore,
+        isFinished,
       }}
     >
       {children}

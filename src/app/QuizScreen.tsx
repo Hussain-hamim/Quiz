@@ -10,10 +10,17 @@ import LottieView from "lottie-react-native";
 import React from "react";
 
 export default function QuizScreen() {
-  const { question, questionIndex, onNext, score, totalQuestions, bestScore } =
-    useQuizContext();
+  const {
+    question,
+    questionIndex,
+    onNext,
+    score,
+    totalQuestions,
+    bestScore,
+    isFinished,
+  } = useQuizContext();
 
-  const { time, startTimer, clearTimer } = useTimer(20);
+  const { time, startTimer, clearTimer } = useTimer(5);
 
   useEffect(() => {
     startTimer();
@@ -24,6 +31,10 @@ export default function QuizScreen() {
   }, [question]);
 
   useEffect(() => {
+    if (isFinished) {
+      return;
+    }
+
     if (time <= 0) {
       onNext();
     }
@@ -35,7 +46,11 @@ export default function QuizScreen() {
         {/* Header */}
         <View>
           <Text style={styles.title}>
-            Question {questionIndex + 1}/{totalQuestions}
+            {isFinished ? (
+              <Text style={styles.result}>Result</Text>
+            ) : (
+              "Question " + (questionIndex + 1 + "/" + totalQuestions)
+            )}
           </Text>
         </View>
 
@@ -99,5 +114,10 @@ const styles = StyleSheet.create({
     marginTop: 15,
     color: "#005055",
     fontWeight: "bold",
+  },
+  result: {
+    fontWeight: "bold",
+    fontSize: 20,
+    textDecorationLine: "underline",
   },
 });

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
 
 export const useTimer = (maxTime: number) => {
   const [time, setTime] = useState(maxTime);
