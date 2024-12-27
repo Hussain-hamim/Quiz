@@ -20,7 +20,7 @@ export default function QuizScreen() {
     isFinished,
   } = useQuizContext();
 
-  const { time, startTimer, clearTimer } = useTimer(5);
+  const { time, startTimer, clearTimer } = useTimer(20);
 
   useEffect(() => {
     startTimer();
