@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import QuizScreen from "./src/app/QuizScreen";
 import QuizProvider from "./src/providers/QuizProvider";
 import CustomButton from "./src/components/CustomButton";
-import { ImageBackground, View } from "react-native";
+import { ImageBackground, Text, View } from "react-native";
 
 export default function App() {
   const [start, setstart] = useState(true);
@@ -15,16 +15,28 @@ export default function App() {
           <View
             style={{
               flex: 1,
-              justifyContent: "center",
+              paddingTop: 50,
+              justifyContent: "space-evenly",
               alignItems: "center",
               backgroundColor: "lightblue",
             }}
           >
             {/* <ImageBackground source={require("./assets/background.jpg")}> */}
+            <View style={{ alignItems: "center" }}>
+              <Text style={{ fontWeight: "bold", fontSize: 30, color: "#289" }}>
+                Quiz
+              </Text>
+              <Text style={{ fontSize: 20, color: "gray" }}>
+                Test your IQ here
+              </Text>
+            </View>
             <CustomButton
               title="Start the game"
               onPress={() => setstart(false)}
             />
+            <Text style={{ color: "gray" }}>
+              @Copyright 2025 - Hussain-Hamim
+            </Text>
             {/* </ImageBackground> */}
           </View>
         ) : (
